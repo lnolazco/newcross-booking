@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Button, Tabs, Card, Row, Col, DatePicker, Input, Radio, Select, Divider, Icon } from 'antd';
-import { getAll, updateUser, addUser, deleteUser } from '../../actions/users';
+import { Button, Tabs, Card, Row, Col, Input, Radio, Select, Divider, Icon } from 'antd';
+import { getSkills, setClientSummary, setDurationPackage } from '../../actions/booking-actions';
+import DurationPackage from '../DurationPackage';
 
 const TabPane = Tabs.TabPane;
 const { TextArea } = Input;
@@ -13,6 +14,14 @@ const Option = Select.Option;
 class AppContainer extends Component {
   state = {
     numberOfSkills: 1,
+  }
+
+  componentWillMount() {
+    this.props.getSkills();
+  }
+
+  onChangeSummary = (e) => {
+    this.props.setClientSummary(e.target.value);
   }
 
   addAdditionalSkill = () => {
@@ -29,9 +38,9 @@ class AppContainer extends Component {
           style={{ width: '100%' }}
           placeholder="Select Skill or Competency"
         >
-          <Option value="jack">Jack</Option>
-          <Option value="lucy">Lucy</Option>
-          <Option value="tom">Tom</Option>
+          {
+            this.props.skills.map(skill => <Option value={skill}>{skill}</Option>)
+          }
         </Select>,
       );
     }
@@ -39,12 +48,7 @@ class AppContainer extends Component {
   }
 
   render() {
-    const radioStyle = {
-      display: 'block',
-      height: '30px',
-      lineHeight: '30px',
-    };
-
+    console.log('props ', this.props);
     const cardStyle = {
       height: '144px',
     };
@@ -58,30 +62,18 @@ class AppContainer extends Component {
                 <Col span={12}>
                   <h4>CLIENT SUMMARY</h4>
                   <Card style={cardStyle}>
-                    <TextArea rows={4} placeholder="Please add summary of the client and why they need care..." />
+                    <TextArea
+                      rows={4}
+                      onChange={this.onChangeSummary}
+                      placeholder="Please add summary of the client and why they need care..."
+                    />
                   </Card>
                 </Col>
                 <Col span={12}>
                   <h4>DURATION OF PACKAGE</h4>
-                  <Card style={cardStyle}>
-                    <Row>
-                      <Col span={12}>
-                        <h4>Start Date</h4>
-                        <DatePicker
-                          format="DD/MM/YYYY"
-                          placeholder="dd/mm/yyyy"
-                          onChange={this.onChange}
-                        />
-                      </Col>
-                      <Col span={12}>
-                        <h4>End Date</h4>
-                        <RadioGroup onChange={this.onChange} >
-                          <Radio style={radioStyle} value={1}>Ongoing</Radio>
-                          <Radio style={radioStyle} value={2}>Specific</Radio>
-                        </RadioGroup>
-                      </Col>
-                    </Row>
-                  </Card>
+                  <DurationPackage
+                    onChange={this.props.setDurationPackage}
+                  />
                 </Col>
               </Row>
               <Row gutter={16}>
@@ -120,29 +112,27 @@ class AppContainer extends Component {
 }
 
 AppContainer.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.object),
-  getAll: PropTypes.func.isRequired,
-  update: PropTypes.func.isRequired,
-  addUser: PropTypes.func.isRequired,
-  deleteUser: PropTypes.func.isRequired,
+  skills: PropTypes.arrayOf(PropTypes.object),
+  getSkills: PropTypes.func.isRequired,
+  setClientSummary: PropTypes.func.isRequired,
+  setDurationPackage: PropTypes.func.isRequired,
 };
 
 AppContainer.defaultProps = {
-  users: [],
+  skills: [],
 };
 
-function mapStateToProperties(state) {
+function mapStateToProperties({ booking }) {
   return {
-    users: state.users,
+    skills: booking.skills,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getAll: () => dispatch(getAll()),
-    update: user => dispatch(updateUser(user)),
-    addUser: () => dispatch(addUser()),
-    deleteUser: id => dispatch(deleteUser(id)),
+    getSkills: () => dispatch(getSkills()),
+    setClientSummary: value => dispatch(setClientSummary(value)),
+    setDurationPackage: data => dispatch(setDurationPackage(data)),
   };
 }
 
