@@ -1,7 +1,9 @@
 export const GET_SKILLS = 'GET_SKILLS';
 export const SET_CLIENT_SUMMARY = 'SET_CLIENT_SUMMARY';
+export const SET_ACCESS_INSTRUCTIONS = 'SET_ACCESS_INSTRUCTIONS';
 export const SET_DURATION_PACKAGE = 'SET_DURATION_PACKAGE';
-export const GET_ALL = 'GET_ALL';
-export const ADD_USER = 'ADD_USER';
-export const DELETE_USER = 'DELETE_USER';
-export const USER_ERROR = 'USER_ERROR';
+export const ADD_SKILL = 'ADD_SKILL';
+export const REMOVE_SKILL = 'REMOVE_SKILL';
+export const SET_ADDRESS = 'SET_ADDRESS';
+export const SET_GENDER = 'SET_GENDER';
+export const SET_UNIFORM_DETAILS = 'SET_UNIFORM_DETAILS';

@@ -1,7 +1,7 @@
-# REACT JS BOILERPLATE
+# NEWCROSS BOOKING
 
-[![Build Status](https://travis-ci.org/lnolazco/react-boilerplate.svg?branch=master)](https://travis-ci.org/lnolazco/react-boilerplate)
-[![npm](https://img.shields.io/npm/v/npm.svg)](https://travis-ci.org/lnolazco/react-boilerplate)
+Repo created based on my [boilerplate](https://github.com/lnolazco/react-boilerplate)
+I used [Ant design](http://beta.ant.design/) as a library of basic components.
 
 It includes: 
 
@@ -19,26 +19,32 @@ It includes:
 - [x] Production Config
 - [x] Custom Babel Preset with Decorators, Class Properties, Rest/Spread operator support
 - [x] Redux
-- [x] Express
 
 ## Requirements
-Node.js
+- Node.js
+- Nvm
 
 ## How to install
+- Run `nvm use`
 - Run `npm install`
 
 ## Starting the app
-- Start backend `npm run server`
-- Open [http://localhost:8181/users](http://localhost:8181)
 - Start the app `npm start`
 - Open [http://localhost:8080](http://localhost:8080)
 
 ## Available Commands
 
 - `npm start` - start the dev server
-- `npm run server` - start the backend
 - `npm clean` - delete the dist folder
 - `npm run lint` - execute an eslint check
 - `npm test` - run all tests
 - `npm run test:watch` - run all tests in watch mode
 - `npm run coverage` - generate code coverage report in the `coverage` folder
+
+## To improve
+
+- Add unit tests
+- Improve code coverage
+- Add functional tests
+- Decompose into more components
+- Refactor code

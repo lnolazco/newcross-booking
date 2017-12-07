@@ -1,35 +1,47 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { AppContainer } from '../../../app/components/App';
+import App from '../../../app/components/App';
+import Summary from '../../../app/components/Summary';
+import DurationPackage from '../../../app/components/DurationPackage';
+import Skills from '../../../app/components/Skills';
+import Address from '../../../app/components/Address';
 
 const props = {
-  users: [
-    { id: 1, firstname: 'demo1', surname: 'demo1' },
-    { id: 2, firstname: 'demo2', surname: 'demo2' },
-  ],
-  getAll: () => {},
-  update: () => {},
-  addUser: () => {},
-  deleteUser: () => {},
+  skillsSelected: [],
+  setClientSummary: jest.fn(),
+  setDurationPackage: jest.fn(),
+  setAddress: jest.fn(),
+  createPackage: jest.fn(),
+  setGender: jest.fn(),
+  setAccessInstructions: jest.fn(),
+  setUniformDetails: jest.fn(),
 };
 
 describe('App Component', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<AppContainer {...props} />);
+    wrapper = shallow(<App.WrappedComponent {...props} />);
   });
 
-  it('should exist', () => {
+  test('should exist', () => {
     expect(wrapper).toBeTruthy();
   });
 
-  it('should have one header', () => {
-    expect(wrapper.find('.app__header').length);
+  test('should add 2 Summary components', () => {
+    expect(wrapper.find(Summary)).toHaveLength(2);
   });
 
-  it('should add a Table component', () => {
-    expect(wrapper.find('Table').length);
+  test('should add DurationPackage component', () => {
+    expect(wrapper.find(DurationPackage)).toHaveLength(1);
+  });
+
+  test('should add Skills component', () => {
+    expect(wrapper.find(Skills)).toHaveLength(1);
+  });
+
+  test('should add Address component', () => {
+    expect(wrapper.find(Address)).toHaveLength(1);
   });
 });
