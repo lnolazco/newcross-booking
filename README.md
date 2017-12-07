@@ -48,3 +48,4 @@ It includes:
 - Add functional tests
 - Decompose into more components
 - Refactor code
+- Move inline styles to scss files 
